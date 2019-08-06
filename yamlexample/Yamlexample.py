@@ -62,13 +62,13 @@ logger.addHandler(ch)
 # deprecated, as the default Loader is unsafe. Please read https://msg.pyyaml.org/load 
 # for full details.
 
-from yaml import load, YAMLError
+from yaml import load, YAMLError, warnings
+warnings({'YAMLLoadWarning': False})
 try:
     from yaml import CLoader as Loader
     logging.info('loaded the c yaml library')
 except ImportError:
-    from yaml import Loader, warnings
-    warnings({'YAMLLoadWarning': False})
+    from yaml import Loader
     logging.info('loaded the python yaml library')
 
 # custom library imports
