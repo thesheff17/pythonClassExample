@@ -35,7 +35,7 @@ RUN \
 RUN wget -q https://www.python.org/ftp/python/3.7.4/Python-3.7.4.tgz && \
     tar -xf Python-3.7.4.tgz && \
     cd Python-3.7.4/ && \
-    ./configure --prefix=/opt/python37 --enable-shared && \
+    ./configure --prefix=/opt/python37 --enable-shared --enable-optimizations && \
      make -j4 && \
      make altinstall
 
