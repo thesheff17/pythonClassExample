@@ -13,9 +13,9 @@ RUN \
         bzip2-devel \
         fail2ban \
         gcc \
-        gcc-c++.x86_64 \
-        gcc.x86_64 \
+        gcc-c++ \
         gdbm-devel \
+        glibc-devel \
         gzip \
         java-1.8.0-openjdk.x86_64 \
         libffi-devel \
@@ -37,7 +37,7 @@ RUN \
 RUN wget -q https://www.python.org/ftp/python/3.7.4/Python-3.7.4.tgz
 RUN tar -xf Python-3.7.4.tgz
 RUN   cd Python-3.7.4/ && \
-    ./configure --prefix=/opt/python37 --enable-shared --enable-optimizations --with-cxx-main=/usr/bin/g++ && \
+    ./configure --prefix=/opt/python37 --enable-shared --enable-optimizations && \
      make -j4 && \
      make altinstall
 
@@ -45,7 +45,7 @@ COPY ./bashrc /root/.bashrc
 
 # yaml c library
 RUN \
-     wget https://pyyaml.org/download/libyaml/yaml-0.2.2.tar.gz && \
+     wget -q https://pyyaml.org/download/libyaml/yaml-0.2.2.tar.gz && \
      tar -xf yaml-0.2.2.tar.gz && \
      cd yaml-0.2.2 && \
      ./configure && \
@@ -54,7 +54,7 @@ RUN \
 
 # pyyaml
  RUN \
-    wget https://pyyaml.org/download/pyyaml/PyYAML-5.1.2.tar.gz && \
+    wget -q https://pyyaml.org/download/pyyaml/PyYAML-5.1.2.tar.gz && \
     tar -xf PyYAML-5.1.2.tar.gz && \
     cd PyYAML-5.1.2 && \
     export LD_LIBRARY_PATH=/opt/python37/lib && /opt/python37/bin/python3.7 setup.py --with-libyaml install
