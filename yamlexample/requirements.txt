@@ -1,1 +1,3 @@
+# this is only needed for development
+# look into Dockerfiile for how to use a C library 
 PyYAML==5.1.2

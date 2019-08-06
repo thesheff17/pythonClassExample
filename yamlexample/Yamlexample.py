@@ -30,10 +30,46 @@ https://pyyaml.org/wiki/PyYAMLDocumentation
 """
 
 # standard library imports
+import __main__ as main
 import random
+import logging
+
+# automatically detect file name being called
+fileName = main.__file__
+fileName = fileName.replace("./", "")
+fileName = fileName.replace(".py", "")
+fileName = fileName + ".log"
+
+# logging
+logger = logging.getLogger()
+logger.setLevel(logging.DEBUG)
+while len(logger.handlers) > 0:
+    del logger.handlers[0]
+ch = logging.FileHandler(fileName)
+ch.setLevel(logging.DEBUG)
+formatter = logging.Formatter('%(asctime)s - %(filename)s - %(funcName)s \
+                              - %(levelname)s - %(message)s')
+
+ch.setFormatter(formatter)
+logger.addHandler(ch)
 
 # pip library imports
-import yaml
+# you will get a warning about load being depcrecated and use safe_load
+# you have to trust your yaml and I want this to work with the c library LibYAML
+# https://pyyaml.org/wiki/LibYAML
+
+# error I'm scripting around: YAMLLoadWarning: calling yaml.load() without Loader=... is 
+# deprecated, as the default Loader is unsafe. Please read https://msg.pyyaml.org/load 
+# for full details.
+
+from yaml import load, YAMLError
+try:
+    from yaml import CLoader as Loader
+    logging.info('loaded the c yaml library')
+except ImportError:
+    from yaml import Loader, warnings
+    warnings({'YAMLLoadWarning': False})
+    logging.info('loaded the python yaml library')
 
 # custom library imports
 
@@ -51,8 +87,8 @@ class Yamlexample:
 
         with open("stuff.yaml", 'r') as stream:
             try:
-                self.data = yaml.safe_load(stream)
-            except yaml.YAMLError as exc:
+                self.data = load(stream, Loader=Loader)
+            except YAMLError as exc:
                 print(exc)
  
         print ("ran the constructor...")
@@ -84,13 +120,13 @@ class Yamlexample:
             print (f'an item in the house {item}')
 
     def load_in_line(self):
-        cars = yaml.safe_load("""
-                                - tesla
-                                - ford
-                                - chevy
-                                - toyota
-                                - honda
-                              """) 
+        cars = load("""
+                      - tesla
+                      - ford
+                      - chevy
+                      - toyota
+                      - honda
+                    """) 
 
         print ()
         print ("car types:")

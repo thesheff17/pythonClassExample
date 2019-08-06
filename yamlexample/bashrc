@@ -1,0 +1,10 @@
+export LD_LIBRARY_PATH=/opt/python37/lib
+export PATH=/opt/python37/bin:$PATH
+
+if [ ! -f /usr/local/bin/python3 ]; then
+    ln -s /opt/python37/bin/python3.7 /usr/local/bin/python3
+fi
+
+if [ ! -f /usr/local/bin/pip3 ]; then
+    ln -s /opt/python37/bin/pip3.7 /usr/local/bin/pip3
+fi
