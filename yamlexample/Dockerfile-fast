@@ -13,6 +13,8 @@ RUN \
         bzip2-devel \
         fail2ban \
         gcc \
+        gcc-c++.x86_64 \
+        gcc.x86_64 \
         gdbm-devel \
         gzip \
         java-1.8.0-openjdk.x86_64 \
