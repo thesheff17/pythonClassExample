@@ -34,10 +34,10 @@ RUN \
         zlib-devel
 
 # install python
-RUN wget -q https://www.python.org/ftp/python/3.7.4/Python-3.7.4.tgz
-RUN tar -xf Python-3.7.4.tgz
-RUN   cd Python-3.7.4/ && \
-    ./configure --prefix=/opt/python37 --enable-shared --enable-optimizations && \
+RUN wget -q https://www.python.org/ftp/python/3.7.4/Python-3.7.4.tgz && \
+    tar -xf Python-3.7.4.tgz && \
+    cd Python-3.7.4/ && \
+    ./configure --prefix=/opt/python37 --enable-shared --enable-optimizations CXX="/usr/bin/g++" && \
      make -j4 && \
      make altinstall
 
