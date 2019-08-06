@@ -10,11 +10,9 @@ RUN \
     yum update -y && \
     yum upgrade -y && \
     yum install -y \
-                bzip2-devel \
+        bzip2-devel \
         fail2ban \
         gcc \
-        gcc-c++ \
-        gdbm-devel \
         glibc-devel \
         gzip \
         java-1.8.0-openjdk.x86_64 \
@@ -38,7 +36,7 @@ RUN \
     wget -q https://www.python.org/ftp/python/3.7.4/Python-3.7.4.tgz && \
     tar -xf Python-3.7.4.tgz && \ 
     cd Python-3.7.4/ && \
-    ./configure --prefix=/opt/python37 --enable-shared CXX="/usr/bin/g++" && \
+    ./configure --prefix=/opt/python37 --enable-shared && \
      make -j4 && \
      make altinstall
 
