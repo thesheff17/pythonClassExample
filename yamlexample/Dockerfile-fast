@@ -17,6 +17,7 @@ RUN \
         gzip \
         java-1.8.0-openjdk.x86_64 \
         libffi-devel \
+        libyaml-devel.x86_64 \
         make \
         ncurses-devel \
         openssl-devel \
