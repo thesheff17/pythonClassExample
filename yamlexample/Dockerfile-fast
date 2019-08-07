@@ -12,6 +12,7 @@ RUN \
     yum install -y \
         bzip2-devel \
         fail2ban \
+        file \
         gcc \
         glibc-devel \
         gzip \
@@ -39,6 +40,10 @@ RUN \
     ./configure --prefix=/opt/python37 --enable-shared && \
      make -j4 && \
      make altinstall
+
+# upgrade pip
+RUN \
+    export LD_LIBRARY_PATH=/opt/python37/lib && /opt/python37/bin/pip3.7 install --upgrade pip
 
 COPY ./bashrc /root/.bashrc
 
