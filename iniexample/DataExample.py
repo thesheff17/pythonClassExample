@@ -46,10 +46,12 @@ class Cars:
     mpg: float
     cost: float
     tax_rate: float
+    doors: int
 
     def total_cost(self):
         new_value = self.cost + (self.cost * self.tax_rate)
         print(f'The cost with taxes for the {self.name} car will be ${new_value}.')
+        print(f'The car has {self.doors} doors.')
 
 
 if __name__ == "__main__":
@@ -65,9 +67,13 @@ if __name__ == "__main__":
     # a list of objects
     my_list = [] 
     for section in parser.sections():
-        mpg  = parser.get(section, 'mpg')
+
+        # the section 'doors' has a DEFAULT value. This way if most of the values are the same
+        # you can set a default value.  Then where its different you can overwrite it. 
+        # see corvette for overwrite
         p1 = Cars(section, parser.get(section, 'color'), parser.getfloat(section, 'mpg'),
-                  parser.getfloat(section, 'cost'), parser.getfloat(section, 'tax_rate'))
+                  parser.getfloat(section, 'cost'), parser.getfloat(section, 'tax_rate'),
+                  parser.getint(section, 'doors'))
         my_list.append(p1)
 
     # loop through objects and get total costs of each car:
