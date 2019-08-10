@@ -52,9 +52,8 @@ class Cars:
     tax_rate: float
 
     def total_cost(self):
-        new_value = self.cost + (self.cost * self.tax_rate)
-        # how to format a float as currency with fstrings 
-        print(f'The cost with taxes for the {self.name} car will be ${new_value*1000:,.2f}.')
+        new_value = round(self.cost + (self.cost * self.tax_rate), 2)
+        print(f'The cost with taxes for the {self.name} car will be ${new_value}.')
 
 
 if __name__ == "__main__":
