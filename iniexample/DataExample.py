@@ -25,7 +25,7 @@
 
 
 """
-this will show you how to use python3.7+ data class
+This will show you how to use to read an ini file
 """
 
 # standard library imports
